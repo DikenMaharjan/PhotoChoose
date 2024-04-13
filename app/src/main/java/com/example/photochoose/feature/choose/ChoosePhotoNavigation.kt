@@ -1,6 +1,11 @@
 package com.example.photochoose.feature.choose
 
 import android.net.Uri
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOut
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.slideOutVertically
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -13,7 +18,13 @@ fun NavGraphBuilder.choosePhotoScreen(
     navigateBack: () -> Unit,
     selectImages: (List<Uri>) -> Unit
 ) {
-    composable(CHOOSE_PHOTO_ROUTE) {
+    composable(
+        route = CHOOSE_PHOTO_ROUTE,
+        enterTransition = {
+            slideInVertically { it }
+        },
+        exitTransition = { slideOutVertically { it } }
+    ) {
         ChoosePhotoScreen(
             navigateBack = navigateBack,
             selectImages = {
