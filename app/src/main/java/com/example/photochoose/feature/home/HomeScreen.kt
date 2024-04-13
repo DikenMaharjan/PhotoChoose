@@ -49,7 +49,7 @@ fun HomeScreen(
             Button(
                 modifier = Modifier, onClick = navigateToChooseImage
             ) {
-                Text(text = "Choose")
+                Text(text = "Choose Images")
             }
         }
     } else {
@@ -85,7 +85,7 @@ private fun HomeScreenImageSelectedContent(
             ExtendedFloatingActionButton(onClick = navigateToChooseImage) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Choose More Image")
                 Spacer(modifier = Modifier.widthIn(LocalSpacing.current.dimen4))
-                Text(text = "Choose Again")
+                Text(text = "Choose")
             }
         }
     ) { padding ->
