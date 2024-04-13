@@ -11,6 +11,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -20,6 +21,7 @@ import com.example.photochoose.core.utils.extensionfunctions.openPackageSettings
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionState
 import com.google.accompanist.permissions.PermissionStatus
+import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.shouldShowRationale
 
 @OptIn(ExperimentalPermissionsApi::class)
@@ -39,6 +41,11 @@ fun ReadPermissionNotGrantedView(
             onGivePermissionClicked = permissionState::launchPermissionRequest,
             permissionState = permissionState
         )
+    }
+    LaunchedEffect(permissionState) {
+        if (!permissionState.status.isGranted) {
+            permissionState.launchPermissionRequest()
+        }
     }
 }
 

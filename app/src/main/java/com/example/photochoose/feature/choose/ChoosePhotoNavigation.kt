@@ -5,9 +5,11 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 
 const val CHOOSE_PHOTO_ROUTE = "ChoosePhoto"
-fun NavGraphBuilder.choosePhotoScreen() {
+fun NavGraphBuilder.choosePhotoScreen(navigateBack: () -> Unit) {
     composable(CHOOSE_PHOTO_ROUTE) {
-        ChoosePhotoScreen()
+        ChoosePhotoScreen(
+            navigateBack = navigateBack
+        )
     }
 }
 

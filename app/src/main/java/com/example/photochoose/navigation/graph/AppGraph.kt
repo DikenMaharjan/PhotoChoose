@@ -17,7 +17,9 @@ fun NavGraphBuilder.appGraph(
         startDestination = HOME_ROUTE
     ) {
         homeScreen(navigateToChooseImage = navController::navigateToChooseImage)
-        choosePhotoScreen()
+        choosePhotoScreen(
+            navigateBack = navController::navigateUp
+        )
     }
 
 }
