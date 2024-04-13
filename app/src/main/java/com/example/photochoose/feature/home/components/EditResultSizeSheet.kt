@@ -62,6 +62,7 @@ private fun EditResultSizeSheet(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = LocalSpacing.current.dimen24)
+            .padding(bottom = LocalSpacing.current.dimen24)
             .systemBarsPadding(),
         verticalArrangement = Arrangement.spacedBy(LocalSpacing.current.dimen4)
     ) {
