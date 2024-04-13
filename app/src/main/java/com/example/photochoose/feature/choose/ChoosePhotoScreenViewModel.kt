@@ -39,4 +39,8 @@ class ChoosePhotoScreenViewModel @Inject constructor(
             _selectedPhotos.update { it + photo }
         }
     }
+
+    companion object{
+        const val NUM_OF_PHOTO_TO_CHOOSE = 2
+    }
 }

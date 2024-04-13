@@ -14,6 +14,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -57,7 +58,8 @@ fun ChoosePhotoScreen(
                     images = images,
                     onBack = navigateBack,
                     selectDisSelectImage = viewModel::selectDisSelectImage,
-                    selectedImages = selectedImages
+                    selectedImages = selectedImages,
+                    onDone = {}
                 )
             }
         }
@@ -71,14 +73,15 @@ private fun ChoosePhotoScreenContent(
     images: List<ImageInfo>,
     onBack: () -> Unit,
     selectedImages: List<ImageInfo>,
-    selectDisSelectImage: (ImageInfo) -> Unit
+    selectDisSelectImage: (ImageInfo) -> Unit,
+    onDone: () -> Unit
 ) {
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(text = "Choose Images")
+                    Text(text = "Choose Images (${selectedImages.size}/${ChoosePhotoScreenViewModel.NUM_OF_PHOTO_TO_CHOOSE})")
                 },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
@@ -89,7 +92,12 @@ private fun ChoosePhotoScreenContent(
                     }
                 },
                 actions = {
-
+                    TextButton(
+                        onClick = onDone,
+                        enabled = selectedImages.size == ChoosePhotoScreenViewModel.NUM_OF_PHOTO_TO_CHOOSE
+                    ) {
+                        Text(text = "Done")
+                    }
                 }
             )
         }
