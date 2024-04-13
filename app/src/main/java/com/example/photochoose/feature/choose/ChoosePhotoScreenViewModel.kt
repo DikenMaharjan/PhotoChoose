@@ -36,11 +36,13 @@ class ChoosePhotoScreenViewModel @Inject constructor(
         if (photo in selectedPhotos.value) {
             _selectedPhotos.update { it - photo }
         } else {
-            _selectedPhotos.update { it + photo }
+            if (selectedPhotos.value.size < 2) {
+                _selectedPhotos.update { it + photo }
+            }
         }
     }
 
-    companion object{
+    companion object {
         const val NUM_OF_PHOTO_TO_CHOOSE = 2
     }
 }
