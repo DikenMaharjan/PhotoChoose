@@ -41,7 +41,6 @@ internal fun EditResultSizeSheet(
         modifier = modifier,
         onDismissRequest = hideEditSheet,
         sheetState = bottomSheetState,
-        windowInsets = rememberZeroWindowInsets()
     ) {
         EditResultSizeSheet(
             setResultSize = setResultSize,
@@ -55,6 +54,7 @@ internal fun EditResultSizeSheet(
 
 }
 
+// If the content of the sheet is hidden due to keyboard, its due to the following issue https://issuetracker.google.com/issues/274872542
 @Composable
 private fun EditResultSizeSheet(
     modifier: Modifier = Modifier,
@@ -66,8 +66,7 @@ private fun EditResultSizeSheet(
             .fillMaxWidth()
             .padding(horizontal = LocalSpacing.current.dimen24)
             .padding(bottom = LocalSpacing.current.dimen24)
-            .systemBarsPadding()
-            .imePadding(),
+        ,
         verticalArrangement = Arrangement.spacedBy(LocalSpacing.current.dimen4),
     ) {
         Text(text = "Edit Result Size", style = MaterialTheme.typography.titleLarge)
