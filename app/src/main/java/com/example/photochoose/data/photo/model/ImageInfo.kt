@@ -5,7 +5,7 @@ import androidx.compose.runtime.Immutable
 
 @Immutable
 data class ImageInfo(
-    val uri: Uri?,
+    val uri: Uri,
     val title: String?,
     val displayName: String?
 )
