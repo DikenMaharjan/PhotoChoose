@@ -34,7 +34,8 @@ import com.google.accompanist.permissions.rememberPermissionState
 fun ChoosePhotoScreen(
     modifier: Modifier = Modifier,
     viewModel: ChoosePhotoScreenViewModel = hiltViewModel(),
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
+    selectImages: (List<ImageInfo>) -> Unit
 ) {
     val images by viewModel.photos.collectAsStateWithLifecycle()
     val selectedImages by viewModel.selectedPhotos.collectAsStateWithLifecycle()
@@ -59,7 +60,9 @@ fun ChoosePhotoScreen(
                     onBack = navigateBack,
                     selectDisSelectImage = viewModel::selectDisSelectImage,
                     selectedImages = selectedImages,
-                    onDone = {}
+                    onDone = {
+                        selectImages(selectedImages)
+                    }
                 )
             }
         }

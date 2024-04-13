@@ -1,14 +1,25 @@
 package com.example.photochoose.feature.choose
 
+import android.net.Uri
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.example.photochoose.data.photo.model.ImageInfo
 
 const val CHOOSE_PHOTO_ROUTE = "ChoosePhoto"
-fun NavGraphBuilder.choosePhotoScreen(navigateBack: () -> Unit) {
+
+const val SELECTED_IMAGES_KEY = "SelectedImages"
+fun NavGraphBuilder.choosePhotoScreen(
+    navigateBack: () -> Unit,
+    selectImages: (List<Uri>) -> Unit
+) {
     composable(CHOOSE_PHOTO_ROUTE) {
         ChoosePhotoScreen(
-            navigateBack = navigateBack
+            navigateBack = navigateBack,
+            selectImages = {
+                selectImages(it.map(ImageInfo::uri))
+                navigateBack()
+            }
         )
     }
 }
