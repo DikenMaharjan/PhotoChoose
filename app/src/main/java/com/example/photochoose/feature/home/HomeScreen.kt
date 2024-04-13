@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -31,6 +32,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.photochoose.feature.home.components.EditResultSizeSheet
 import com.example.photochoose.feature.home.components.ImageView
+import com.example.photochoose.ui.rememberZeroWindowInsets
 import com.example.photochoose.ui.theme.LocalSpacing
 import kotlin.math.sqrt
 
@@ -75,7 +77,7 @@ private fun HomeScreenImageSelectedContent(
     var isEditSheetVisible by rememberSaveable { mutableStateOf(false) }
 
     Scaffold(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize().systemBarsPadding(),
         topBar = {
             HomeScreenTopBar(
                 showEditSheet = { isEditSheetVisible = true }
@@ -87,7 +89,8 @@ private fun HomeScreenImageSelectedContent(
                 Spacer(modifier = Modifier.widthIn(LocalSpacing.current.dimen4))
                 Text(text = "Choose")
             }
-        }
+        },
+        contentWindowInsets = rememberZeroWindowInsets()
     ) { padding ->
         SelectedImages(
             modifier = Modifier.padding(padding),

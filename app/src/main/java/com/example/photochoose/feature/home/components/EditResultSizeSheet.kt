@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.text.KeyboardOptions
@@ -23,6 +24,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
+import com.example.photochoose.ui.rememberZeroWindowInsets
 import com.example.photochoose.ui.theme.LocalSpacing
 import kotlinx.coroutines.launch
 
@@ -38,7 +40,8 @@ internal fun EditResultSizeSheet(
     ModalBottomSheet(
         modifier = modifier,
         onDismissRequest = hideEditSheet,
-        sheetState = bottomSheetState
+        sheetState = bottomSheetState,
+        windowInsets = rememberZeroWindowInsets()
     ) {
         EditResultSizeSheet(
             setResultSize = setResultSize,
@@ -63,8 +66,9 @@ private fun EditResultSizeSheet(
             .fillMaxWidth()
             .padding(horizontal = LocalSpacing.current.dimen24)
             .padding(bottom = LocalSpacing.current.dimen24)
-            .systemBarsPadding(),
-        verticalArrangement = Arrangement.spacedBy(LocalSpacing.current.dimen4)
+            .systemBarsPadding()
+            .imePadding(),
+        verticalArrangement = Arrangement.spacedBy(LocalSpacing.current.dimen4),
     ) {
         Text(text = "Edit Result Size", style = MaterialTheme.typography.titleLarge)
 
