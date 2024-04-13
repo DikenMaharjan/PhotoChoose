@@ -16,7 +16,7 @@ fun NavGraphBuilder.homeScreen(navigateToChooseImage: () -> Unit) {
             .collectAsStateWithLifecycle()
         HomeScreen(
             navigateToChooseImage = navigateToChooseImage,
-            selectedImages = selectedImages
+            selectedImagesUri = selectedImages
         )
     }
 }
