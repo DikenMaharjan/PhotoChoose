@@ -15,11 +15,11 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.photochoose.data.photo.model.ImageInfo
 import com.example.photochoose.feature.choose.components.GalleryPicker
 import com.example.photochoose.feature.choose.components.ReadPermissionNotGrantedView
@@ -35,7 +35,8 @@ fun ChoosePhotoScreen(
     viewModel: ChoosePhotoScreenViewModel = hiltViewModel(),
     navigateBack: () -> Unit
 ) {
-    val images by viewModel.photos.collectAsState()
+    val images by viewModel.photos.collectAsStateWithLifecycle()
+    val selectedImages by viewModel.selectedPhotos.collectAsStateWithLifecycle()
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -54,9 +55,10 @@ fun ChoosePhotoScreen(
             PermissionStatus.Granted -> {
                 ChoosePhotoScreenContent(
                     images = images,
-                    onBack =navigateBack
+                    onBack = navigateBack,
+                    selectDisSelectImage = viewModel::selectDisSelectImage,
+                    selectedImages = selectedImages
                 )
-
             }
         }
     }
@@ -67,7 +69,9 @@ fun ChoosePhotoScreen(
 private fun ChoosePhotoScreenContent(
     modifier: Modifier = Modifier,
     images: List<ImageInfo>,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    selectedImages: List<ImageInfo>,
+    selectDisSelectImage: (ImageInfo) -> Unit
 ) {
     Scaffold(
         modifier = modifier.fillMaxSize(),
@@ -95,9 +99,8 @@ private fun ChoosePhotoScreenContent(
                 .padding(padding)
                 .fillMaxSize(),
             images = images,
-            onImageClick = {
-
-            }
+            onImageClick = selectDisSelectImage,
+            selectedImages = selectedImages
         )
     }
 }

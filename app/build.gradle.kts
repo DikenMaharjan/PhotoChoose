@@ -64,6 +64,8 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
 
     implementation(libs.accompanist.permissions)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+
 
     implementation(libs.coil.compose)
 
